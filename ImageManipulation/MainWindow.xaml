@@ -1,0 +1,20 @@
+﻿<Window x:Class="ImageManipulation.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ImageManipulation"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="350" Width="525">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="150"/>
+        </Grid.ColumnDefinitions>
+        <Image Grid.Column="0" x:Name="image" HorizontalAlignment="Stretch"  Margin="10,10,10,10" VerticalAlignment="Stretch"  Loaded="image_Loaded"/>
+        <StackPanel Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <Button  x:Name="NextBTN" Height="30"   Click="NextBTN_Click">Next</Button>
+        <Button  x:Name="PixelateBTN" Height="30" Click="PixelateBTN_Click">Pixelate</Button>
+        </StackPanel>
+    </Grid>
+</Window>
