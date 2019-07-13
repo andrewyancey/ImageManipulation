@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace ImageManipulation
 {
-    public static class Pixelizer
+    public static class ImageEffects
     {
         public static EditableBitmap Pixelize(CopyableBitmap inputImage)
         {
             EditableBitmap myBmp = new EditableBitmap(inputImage.Width, inputImage.Height);
-            int Divisions = 5;
+            int Divisions = 50;
             float exactSpacingX = (float)inputImage.Width / Divisions;
             float exactSpacingY = (float)inputImage.Height / Divisions;
             int spacingX = (int)Math.Floor(exactSpacingX);
@@ -31,6 +31,31 @@ namespace ImageManipulation
                 }
             }
             return myBmp;
+        }
+
+        public static EditableBitmap Greyalize(CopyableBitmap inputImage)
+        {
+            EditableBitmap outputImage = new EditableBitmap(inputImage.Width, inputImage.Height);
+            for (int x = 0; x < inputImage.Width; x++)
+            {
+                for (int y = 0; y < inputImage.Height; y++)
+                {
+                    Color color = inputImage.GetPixel(x, y);
+                    int newValue = 0;
+
+                    newValue += color.B;
+                    newValue += color.G;
+                    newValue += color.R;
+                    newValue += color.A;
+                    newValue = newValue / 4;
+                    color.B = (byte)newValue;
+                    color.G = (byte)newValue;
+                    color.R = (byte)newValue;
+                    color.A = (byte)newValue;
+                    outputImage.SetPixelColor(x, y, color);
+                }
+            }
+            return outputImage;
         }
 
         private static Color AverageColor(CopyableBitmap image, Int32Rect area)

@@ -1,18 +1,10 @@
 ﻿using System;
+using System.Windows;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Drawing;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+
 
 namespace ImageManipulation
 {
@@ -21,7 +13,7 @@ namespace ImageManipulation
     /// </summary>
     public partial class MainWindow : Window
     {
-        CopyableBitmap[] _images = new CopyableBitmap[2];
+        List<CopyableBitmap> _images = new List<CopyableBitmap>();
         int _currentIndex = 0;
 
         public MainWindow()
@@ -41,7 +33,7 @@ namespace ImageManipulation
 
         protected void AdvanceIndex()
         {
-            if(_currentIndex + 1 < _images.Length)
+            if(_currentIndex + 1 < _images.Count)
             {
                 _currentIndex++;
             }
@@ -58,8 +50,7 @@ namespace ImageManipulation
 
         private void image_Loaded(object sender, RoutedEventArgs e)
         {
-            _images[0] = LoadImage(PathToUri("dolphinfront.jpg"));
-            _images[1] = LoadImage(PathToUri("photo.jpg"));
+
             AssignImageFromIndex();
         }
 
@@ -71,8 +62,26 @@ namespace ImageManipulation
 
         private void PixelateBTN_Click(object sender, RoutedEventArgs e)
         {
-            EditableBitmap bmp = Pixelizer.Pixelize(_images[_currentIndex]);
+            EditableBitmap bmp = ImageEffects.Pixelize(_images[_currentIndex]);
             image.Source = bmp.GetBMPSource();
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            DirectoryInfo info = new DirectoryInfo(Environment.GetFolderPath(Environment.SpecialFolder.MyPictures));
+            string[] extensions = { ".jpg", ".jpeg", ".png" };
+            FileInfo[] files = info.EnumerateFiles("*.*", SearchOption.TopDirectoryOnly).Where(f => extensions.Contains(f.Extension)).ToArray();
+
+            foreach(FileInfo file in files)
+            {
+                Uri path = PathToUri(file.FullName);
+                _images.Add(LoadImage(path));
+            }
+        }
+
+        private void GreyifyBTN_Click(object sender, RoutedEventArgs e)
+        {
+            image.Source = ImageEffects.Greyalize(_images[_currentIndex]).GetBMPSource();
         }
     }
 }
