@@ -85,7 +85,7 @@ namespace ImageManipulation
 
         protected int CoordinateToIndex(int x, int y)
         {
-            // 4 is the number of bytes per pixel. This needs to be changed so that it reflects the format
+            // TODO: 4 is the number of bytes per pixel. This needs to be changed so that it reflects the format
             return (y * _image.PixelWidth * 4) + (x * 4);
         }
     }

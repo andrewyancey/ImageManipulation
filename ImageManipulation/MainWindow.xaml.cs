@@ -4,6 +4,7 @@ using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 
 namespace ImageManipulation
@@ -13,56 +14,27 @@ namespace ImageManipulation
     /// </summary>
     public partial class MainWindow : Window
     {
-        List<CopyableBitmap> _images = new List<CopyableBitmap>();
-        int _currentIndex = 0;
-
         public MainWindow()
         {
             InitializeComponent();
         }
 
-        protected CopyableBitmap LoadImage(Uri path)
-        {
-            return new CopyableBitmap(path, 800);
-        }
-
-        protected Uri PathToUri(string path)
-        {
-            return new Uri(path, UriKind.Relative);
-        }
-
-        protected void AdvanceIndex()
-        {
-            if(_currentIndex + 1 < _images.Count)
-            {
-                _currentIndex++;
-            }
-            else
-            {
-                _currentIndex = 0;
-            }
-        }
-
-        protected void AssignImageFromIndex()
-        {
-            image.Source = _images[_currentIndex].Image;
-        }
+        ImageCollection _images = new ImageCollection();
 
         private void image_Loaded(object sender, RoutedEventArgs e)
         {
-
-            AssignImageFromIndex();
+            image.Source = _images.GetCurrentImage();
         }
 
         private void NextBTN_Click(object sender, RoutedEventArgs e)
         {
-            AdvanceIndex();
-            AssignImageFromIndex();
+            _images.AdvanceIndex();
+            image.Source = _images.GetCurrentImage();
         }
 
         private void PixelateBTN_Click(object sender, RoutedEventArgs e)
         {
-            EditableBitmap bmp = ImageEffects.Pixelize(_images[_currentIndex]);
+            EditableBitmap bmp = ImageEffects.Pixelize(_images.GetCurrentCopyableBitmap());
             image.Source = bmp.GetBMPSource();
         }
 
@@ -71,17 +43,12 @@ namespace ImageManipulation
             DirectoryInfo info = new DirectoryInfo(Environment.GetFolderPath(Environment.SpecialFolder.MyPictures));
             string[] extensions = { ".jpg", ".jpeg", ".png" };
             FileInfo[] files = info.EnumerateFiles("*.*", SearchOption.TopDirectoryOnly).Where(f => extensions.Contains(f.Extension)).ToArray();
-
-            foreach(FileInfo file in files)
-            {
-                Uri path = PathToUri(file.FullName);
-                _images.Add(LoadImage(path));
-            }
+            _images.AddImages(files.Select(f => f.FullName).ToArray());
         }
 
         private void GreyifyBTN_Click(object sender, RoutedEventArgs e)
         {
-            image.Source = ImageEffects.Greyalize(_images[_currentIndex]).GetBMPSource();
+            image.Source = ImageEffects.Greyalize(_images.GetCurrentCopyableBitmap()).GetBMPSource();
         }
     }
 }

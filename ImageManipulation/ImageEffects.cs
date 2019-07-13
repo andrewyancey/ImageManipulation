@@ -13,19 +13,34 @@ namespace ImageManipulation
         public static EditableBitmap Pixelize(CopyableBitmap inputImage)
         {
             EditableBitmap myBmp = new EditableBitmap(inputImage.Width, inputImage.Height);
-            int Divisions = 50;
-            float exactSpacingX = (float)inputImage.Width / Divisions;
-            float exactSpacingY = (float)inputImage.Height / Divisions;
-            int spacingX = (int)Math.Floor(exactSpacingX);
-            int spacingY = (int)Math.Floor(exactSpacingY);
-            int finalSpacingX = 0;
-            int finalSpacingY = 0;
+            int spacingX = 5;
+            int spacingY = 5;
 
-            for (int xa = 0; xa < spacingX * Divisions; xa += spacingX)
+            for (int xa = 0; xa < inputImage.Width; xa += spacingX)
             {
-                for (int ya = 0; ya < spacingY * Divisions; ya += spacingY)
+                for (int ya = 0; ya < inputImage.Height; ya += spacingY)
                 {
-                    Int32Rect area = new Int32Rect(xa, ya, spacingX, spacingY);
+                    // decide if there is enough room for the entire spacing and 
+                    // if not then just use the remaining pixels
+                    int width = 0;
+                    int height = 0;
+                    if (ya + spacingY < inputImage.Height)
+                    {
+                        height = spacingY;
+                    }
+                    else
+                    {
+                        height = inputImage.Height - ya;
+                    }
+                    if (xa + spacingX < inputImage.Width)
+                    {
+                        width = spacingX;
+                    }
+                    else
+                    {
+                        width = inputImage.Width - xa;
+                    }
+                    Int32Rect area = new Int32Rect(xa, ya, width, height);
                     Color averageColor = AverageColor(inputImage, area);
                     SetColor(myBmp, area, averageColor);
                 }
@@ -56,6 +71,14 @@ namespace ImageManipulation
                 }
             }
             return outputImage;
+        }
+
+        public static EditableBitmap Blur(CopyableBitmap inputImage)
+        {
+            //TL -1, -1  T 0, -1 TR 1, -1
+            // L -1,  0  C 0,  0  R 1,  0
+            //BL -1,  1  B 0,  1 BR 1,  1
+            throw new System.NotImplementedException();
         }
 
         private static Color AverageColor(CopyableBitmap image, Int32Rect area)
@@ -89,6 +112,11 @@ namespace ImageManipulation
                     image.SetPixelColor(x, y, color);
                 }
             }
+        }
+
+        private static Color[] GetNeighbors(int x, int y, CopyableBitmap image)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }
