@@ -83,10 +83,42 @@ namespace ImageManipulation
             return returnColor;
         }
 
+        public byte[] GetPixelBytes(int x, int y)
+        {
+            int index = CoordinateToIndex(x, y);
+            if(index >= 0 && index <= _rawPixels.Length - 5)
+            {
+                byte[] pixelBytes = new byte[4];
+                pixelBytes[0] = _rawPixels[index];
+                pixelBytes[1] = _rawPixels[index + 1];
+                pixelBytes[2] = _rawPixels[index + 2];
+                pixelBytes[3] = _rawPixels[index + 3];
+                return pixelBytes;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
         protected int CoordinateToIndex(int x, int y)
         {
             // TODO: 4 is the number of bytes per pixel. This needs to be changed so that it reflects the format
-            return (y * _image.PixelWidth * 4) + (x * 4);
+            if (x >= 0 && y >= 0)
+            {
+                if (x < Image.Width && y < Image.Height)
+                {
+                    return (y * _image.PixelWidth * 4) + (x * 4);
+                }
+                else
+                {
+                    return -2;
+                }
+            }
+            else
+            {
+                return -1;
+            }
         }
     }
 }

@@ -12,5 +12,3 @@ D:\Development\ImageManipulation\ImageManipulation\obj\Debug\ImageManipulation.c
 D:\Development\ImageManipulation\ImageManipulation\obj\Debug\ImageManipulation.exe
 D:\Development\ImageManipulation\ImageManipulation\obj\Debug\ImageManipulation.pdb
 D:\Development\ImageManipulation\ImageManipulation\obj\Debug\ImageManipulation.csprojResolveAssemblyReference.cache
-D:\Development\ImageManipulation\ImageManipulation\bin\Debug\photo.jpg
-D:\Development\ImageManipulation\ImageManipulation\bin\Debug\dolphinfront.jpg
