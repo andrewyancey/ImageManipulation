@@ -1,31 +1,25 @@
-﻿using System;
-using System.Windows;
-using System.Windows.Media;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ImageManipulation
+﻿namespace ImageManipulation
 {
+    using ImageManipulation.Effects;
+
     public static class ImageEffects
     {
-        public static EditableBitmap Pixelize(CopyableBitmap inputImage)
+        public static EditableBitmap Blur(CopyableBitmap inputImage)
         {
-            Pixelizer pixelizer = new Pixelizer(inputImage, 5, 5);
-            return pixelizer.Pixelize();
+            return EffectFactory.CreateEffect(EffectType.Blur)
+                                .Apply(inputImage);
         }
 
         public static EditableBitmap Greyalize(CopyableBitmap inputImage)
         {
-            Greyalizer greyalizer = new Greyalizer(inputImage);
-            return greyalizer.Greyalize();
+            return EffectFactory.CreateEffect(EffectType.Grayscale)
+                                .Apply(inputImage);
         }
 
-        public static EditableBitmap Blur(CopyableBitmap inputImage)
+        public static EditableBitmap Pixelize(CopyableBitmap inputImage)
         {
-            Blurer blurer = new Blurer(inputImage);
-            return blurer.Blur();
+            return EffectFactory.CreateEffect(EffectType.Pixelize)
+                                .Apply(inputImage);
         }
     }
 }
