@@ -46,6 +46,18 @@ namespace ImageManipulation
             }
         }
 
+        public void ReduceIndex()
+        {
+            if (_currentIndex - 1 >= 0)
+            {
+                _currentIndex--;
+            }
+            else
+            {
+                _currentIndex = _images.Count - 1;
+            }
+        }
+
         protected CopyableBitmap ImageFromPath(Uri path)
         {
             return new CopyableBitmap(path, 800);

@@ -32,6 +32,12 @@ namespace ImageManipulation
             image.Source = _images.GetCurrentImage();
         }
 
+        private void PreviousBTN_Click(object sender, RoutedEventArgs e)
+        {
+            _images.ReduceIndex();
+            image.Source = _images.GetCurrentImage();
+        }
+
         private void PixelateBTN_Click(object sender, RoutedEventArgs e)
         {
             EditableBitmap bmp = ImageEffects.Pixelize(_images.GetCurrentCopyableBitmap());
@@ -55,5 +61,6 @@ namespace ImageManipulation
         {
             image.Source = ImageEffects.Blur(_images.GetCurrentCopyableBitmap()).GetBMPSource();
         }
+
     }
 }
