@@ -7,10 +7,9 @@ using System.Threading.Tasks;
 
 namespace ImageManipulation
 {
-    class Blurer
+    public class Blurer
     {
-
-        CopyableBitmap _inputImage;
+        private CopyableBitmap _inputImage;
 
         public Blurer(CopyableBitmap inputImage)
         {
@@ -29,6 +28,7 @@ namespace ImageManipulation
             }
             return outputImage;
         }
+
         // gets the color value of surrounding pixels, and returns that information as a list of byte arrays
         private List<byte[]> GetSurroundingColors(int x, int y, CopyableBitmap image)
         {
@@ -59,6 +59,7 @@ namespace ImageManipulation
             Color blurredColor = GetBlurredColor(GetSurroundingColors(x, y, _inputImage));
             outputImage.SetPixelColor(x, y, blurredColor);
         }
+
         // returns the sum of each individual color channel
         private int[] SumColorChannels(List<byte[]> colorData)
         {
@@ -85,11 +86,13 @@ namespace ImageManipulation
 
         private Color ToColor(int[] input)
         {
-            Color blurredColor = new Color();
-            blurredColor.B = (byte)input[0];
-            blurredColor.G = (byte)input[1];
-            blurredColor.R = (byte)input[2];
-            blurredColor.A = (byte)input[3];
+            Color blurredColor = new Color
+            {
+                B = (byte)input[0],
+                G = (byte)input[1],
+                R = (byte)input[2],
+                A = (byte)input[3]
+            };
             return blurredColor;
         }
     }
