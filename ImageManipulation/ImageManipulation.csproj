@@ -63,7 +63,6 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Blurer.cs" />
     <Compile Include="CopyableBitmap.cs" />
     <Compile Include="EditableBitmap.cs" />
     <Compile Include="Effects\BlurEffect.cs" />
@@ -71,7 +70,6 @@
     <Compile Include="Effects\EffectType.cs" />
     <Compile Include="Effects\GreyscaleEffect.cs" />
     <Compile Include="Effects\PixelizeEffect.cs" />
-    <Compile Include="Greyalizer.cs" />
     <Compile Include="Effects\IEffect.cs" />
     <Compile Include="ImageCollection.cs" />
     <Compile Include="ImageEffects.cs" />
@@ -81,7 +79,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Pixelizer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
