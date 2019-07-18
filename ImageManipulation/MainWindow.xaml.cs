@@ -50,5 +50,10 @@ namespace ImageManipulation
         {
             image.Source = ImageEffects.Greyalize(_images.GetCurrentCopyableBitmap()).GetBMPSource();
         }
+
+        private void BlurBTN_Click(object sender, RoutedEventArgs e)
+        {
+            image.Source = ImageEffects.Blur(_images.GetCurrentCopyableBitmap()).GetBMPSource();
+        }
     }
 }
