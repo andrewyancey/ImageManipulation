@@ -63,6 +63,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Blurer.cs" />
     <Compile Include="CopyableBitmap.cs" />
     <Compile Include="EditableBitmap.cs" />
     <Compile Include="Greyalizer.cs" />
