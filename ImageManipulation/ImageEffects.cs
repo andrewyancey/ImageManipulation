@@ -21,5 +21,11 @@
             return EffectFactory.CreateEffect(EffectType.Pixelize)
                                 .Apply(inputImage);
         }
+
+        public static EditableBitmap Redscale(CopyableBitmap inputImage)
+        {
+            return EffectFactory.CreateEffect(EffectType.Redscale)
+                                .Apply(inputImage);
+        }
     }
 }

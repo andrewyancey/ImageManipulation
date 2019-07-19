@@ -17,6 +17,9 @@
                 case EffectType.Pixelize:
                     return new PixelizeEffect(5, 5);
 
+                case EffectType.Redscale:
+                    return new RedscaleEffect();
+
                 default:
                     throw new ArgumentOutOfRangeException(nameof(effectType), effectType, "Invalid effect type.");
             }

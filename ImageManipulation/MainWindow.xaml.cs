@@ -62,5 +62,9 @@ namespace ImageManipulation
             image.Source = ImageEffects.Blur(_images.GetCurrentCopyableBitmap()).GetBMPSource();
         }
 
+        private void RedscaleBTN_Click(object sender, RoutedEventArgs e)
+        {
+            image.Source = ImageEffects.Redscale(_images.GetCurrentCopyableBitmap()).GetBMPSource();
+        }
     }
 }

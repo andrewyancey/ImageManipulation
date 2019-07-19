@@ -71,6 +71,7 @@
     <Compile Include="Effects\GreyscaleEffect.cs" />
     <Compile Include="Effects\PixelizeEffect.cs" />
     <Compile Include="Effects\IEffect.cs" />
+    <Compile Include="Effects\RedscaleEffect.cs" />
     <Compile Include="ImageCollection.cs" />
     <Compile Include="ImageEffects.cs" />
     <Compile Include="MainWindow.xaml.cs">

@@ -4,6 +4,7 @@
     {
         Blur,
         Grayscale,
-        Pixelize
+        Pixelize,
+        Redscale
     }
 }

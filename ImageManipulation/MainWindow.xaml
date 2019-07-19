@@ -17,6 +17,7 @@
             <Button  x:Name="PreviousBTN" Height="30" Click="PreviousBTN_Click" >&lt;&lt;Previous</Button>
             <Button  x:Name="PixelateBTN" Height="30" Click="PixelateBTN_Click">Pixelate</Button>
             <Button  x:Name="GreyifyBTN" Height="30" Click="GreyifyBTN_Click" >Greyify</Button>
+            <Button  x:Name="RedscaleBTN" Height="30" Click="RedscaleBTN_Click">Redscale</Button>
             <Button  x:Name="BlurBTN" Height="30" Click="BlurBTN_Click">Blur</Button>
         </StackPanel>
     </Grid>
