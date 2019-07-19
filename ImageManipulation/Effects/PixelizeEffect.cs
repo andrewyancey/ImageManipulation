@@ -62,18 +62,19 @@
                 height = _inputImage.Height - offsetY;
             }
             return new Int32Rect(offsetX, offsetY, width, height);
-        } 
+        }
 
         private Color AverageColor(CopyableBitmap image, Int32Rect area)
         {
             byte[,] pixels = (byte[,])image.GetPixelChannels(area).Clone();
             int[] channelSums = SumPixelChannels(pixels);
-            Color averageColor = new Color();
-
-            averageColor.B = (byte)(channelSums[0] / pixels.GetLength(1));
-            averageColor.G = (byte)(channelSums[1] / pixels.GetLength(1));
-            averageColor.R = (byte)(channelSums[2] / pixels.GetLength(1));
-            averageColor.A = (byte)(channelSums[3] / pixels.GetLength(1));
+            Color averageColor = new Color
+            {
+                B = (byte)(channelSums[0] / pixels.GetLength(1)),
+                G = (byte)(channelSums[1] / pixels.GetLength(1)),
+                R = (byte)(channelSums[2] / pixels.GetLength(1)),
+                A = (byte)(channelSums[3] / pixels.GetLength(1))
+            };
             return averageColor;
         }
 

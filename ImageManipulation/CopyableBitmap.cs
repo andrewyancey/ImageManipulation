@@ -7,50 +7,29 @@ namespace ImageManipulation
 {
     public class CopyableBitmap
     {
-        BitmapImage _image;
-        int _stride;
-        byte[] _rawPixels;
-        int _width;
-        int _height;
+        private int _stride;
+        private byte[] _rawPixels;
 
-        public int Width
-        {
-            get
-            {
-                return _width;
-            }
-        }
+        public int Width { get; private set; }
 
-        public int Height
-        {
-            get
-            {
-                return _height;
-            }
-        }
+        public int Height { get; private set; }
 
-        public BitmapImage Image
-        {
-            get
-            {
-                return _image;
-            }
-        }
+        public BitmapImage Image { get; private set; }
 
 
         public CopyableBitmap(Uri path, int width)
         {
-            _image = new BitmapImage();
-            _image.BeginInit();
-            _image.DecodePixelWidth = width;
-            _image.UriSource = path;
-            _image.EndInit();
+            Image = new BitmapImage();
+            Image.BeginInit();
+            Image.DecodePixelWidth = width;
+            Image.UriSource = path;
+            Image.EndInit();
 
-            _width = _image.PixelWidth;
-            _height = _image.PixelHeight;
-            _stride = (_image.PixelWidth * _image.Format.BitsPerPixel + 7) / 8;
-            _rawPixels = new byte[_stride * _image.PixelHeight];
-            _image.CopyPixels(_rawPixels, _stride, 0);
+            Width = Image.PixelWidth;
+            Height = Image.PixelHeight;
+            _stride = (Image.PixelWidth * Image.Format.BitsPerPixel + 7) / 8;
+            _rawPixels = new byte[_stride * Image.PixelHeight];
+            Image.CopyPixels(_rawPixels, _stride, 0);
         }
 
         public byte[,] GetPixelChannels(Int32Rect area)
@@ -75,18 +54,20 @@ namespace ImageManipulation
         public Color GetPixel(int x, int y)
         {
             int index = CoordinateToIndex(x, y);
-            Color returnColor = new Color();
-            returnColor.B = _rawPixels[index];
-            returnColor.G = _rawPixels[index + 1];
-            returnColor.R = _rawPixels[index + 2];
-            returnColor.A = _rawPixels[index + 3];
+            Color returnColor = new Color
+            {
+                B = _rawPixels[index],
+                G = _rawPixels[index + 1],
+                R = _rawPixels[index + 2],
+                A = _rawPixels[index + 3]
+            };
             return returnColor;
         }
 
         public byte[] GetPixelBytes(int x, int y)
         {
             int index = CoordinateToIndex(x, y);
-            if(index >= 0 && index <= _rawPixels.Length - 5)
+            if (index >= 0 && index <= _rawPixels.Length - 5)
             {
                 byte[] pixelBytes = new byte[4];
                 pixelBytes[0] = _rawPixels[index];
@@ -108,7 +89,7 @@ namespace ImageManipulation
             {
                 if (x < Image.Width && y < Image.Height)
                 {
-                    return (y * _image.PixelWidth * 4) + (x * 4);
+                    return (y * Image.PixelWidth * 4) + (x * 4);
                 }
                 else
                 {

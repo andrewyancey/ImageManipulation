@@ -43,16 +43,19 @@
             sumValue += color.G;
             sumValue += color.R;
             sumValue += color.A;
+
             return sumValue;
         }
 
         private Color ColorFromValue(int value)
         {
-            Color color = new Color();
-            color.B = (byte)value;
-            color.G = (byte)value;
-            color.R = (byte)value;
-            color.A = (byte)value;
+            Color color = new Color
+            {
+                B = (byte)value,
+                G = (byte)value,
+                R = (byte)value,
+                A = (byte)value
+            };
             return color;
         }
     }
