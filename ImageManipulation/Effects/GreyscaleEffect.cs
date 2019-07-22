@@ -1,6 +1,7 @@
 ﻿namespace ImageManipulation.Effects
 {
     using System.Windows.Media;
+    using Imaging;
 
     public class GreyscaleEffect : IEffect
     {
@@ -28,14 +29,14 @@
 
         private void GreyalizePixel(int x, int y, EditableBitmap _outputImage)
         {
-            Color originalColor = _inputImage.GetPixel(x, y);
+            ImageColor originalColor = new ImageColor(_inputImage.GetPixel(x, y));
             int colorValue = SumColorValues(originalColor);
             colorValue = colorValue / 4;
-            Color newColor = ColorFromValue(colorValue);
+            ImageColor newColor = ColorFromValue(colorValue);
             _outputImage.SetPixelColor(x, y, newColor);
         }
 
-        private int SumColorValues(Color color)
+        private int SumColorValues(ImageColor color)
         {
             int sumValue = 0;
 
@@ -47,9 +48,9 @@
             return sumValue;
         }
 
-        private Color ColorFromValue(int value)
+        private ImageColor ColorFromValue(int value)
         {
-            Color color = new Color
+            ImageColor color = new ImageColor
             {
                 B = (byte)value,
                 G = (byte)value,

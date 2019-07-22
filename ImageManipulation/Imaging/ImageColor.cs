@@ -14,21 +14,6 @@ namespace ImageManipulation.Imaging
     {
         private Color _color;
 
-        public static explicit operator byte[](ImageColor color)
-        {
-            byte[] channels = new byte[4];
-            channels[0] = color._color.B;
-            channels[1] = color._color.G;
-            channels[2] = color._color.R;
-            channels[3] = color._color.A;
-            return channels;
-        }
-
-        public static explicit operator Color(ImageColor color)
-        {
-            return color._color;
-        }
-
         public ImageColor(byte[] channels)
         {
             if (channels.Length <= 4)
@@ -63,6 +48,76 @@ namespace ImageManipulation.Imaging
             {
                 throw new ArgumentOutOfRangeException("an incorrect array length was passed to channels");
             }
+        }
+
+        public ImageColor(Color color)
+        {
+            _color = color;
+        }
+
+        public ImageColor(){ }
+
+        public byte B
+        {
+            get
+            {
+                return _color.B;
+            }
+            set
+            {
+                _color.B = value;
+            }
+        }
+
+        public byte G
+        {
+            get
+            {
+                return _color.G;
+            }
+            set
+            {
+                _color.G = value;
+            }
+        }
+
+        public byte R
+        {
+            get
+            {
+                return _color.R;
+            }
+            set
+            {
+                _color.R = value;
+            }
+        }
+
+        public byte A
+        {
+            get
+            {
+                return _color.A;
+            }
+            set
+            {
+                _color.A = value;
+            }
+        }
+
+        public static explicit operator byte[](ImageColor color)
+        {
+            byte[] channels = new byte[4];
+            channels[0] = color._color.B;
+            channels[1] = color._color.G;
+            channels[2] = color._color.R;
+            channels[3] = color._color.A;
+            return channels;
+        }
+
+        public static implicit operator Color(ImageColor color)
+        {
+            return color._color;
         }
     }
 }
