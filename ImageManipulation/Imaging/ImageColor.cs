@@ -14,7 +14,6 @@ namespace ImageManipulation.Imaging
     {
         private Color _color;
 
-
         public ImageColor() { _color = new Color(); }
 
         public ImageColor(byte[] channels)
@@ -50,31 +49,38 @@ namespace ImageManipulation.Imaging
             _color = color;
         }
 
-
+        /// <summary>
+        /// Blue channel
+        /// </summary>
         public byte B
         {
             get { return _color.B; }
             set { _color.B = value; }
         }
-
+        /// <summary>
+        /// Green channel
+        /// </summary>
         public byte G
         {
             get { return _color.G; }
             set { _color.G = value; }
         }
-
+        /// <summary>
+        /// Red channel
+        /// </summary>
         public byte R
         {
             get { return _color.R; }
             set { _color.R = value; }
         }
-
+        /// <summary>
+        /// Alpha channel
+        /// </summary>
         public byte A
         {
             get { return _color.A; }
             set { _color.A = value; }
         }
-
 
         public static explicit operator byte[](ImageColor color)
         {
@@ -89,6 +95,22 @@ namespace ImageManipulation.Imaging
         public static implicit operator Color(ImageColor color)
         {
             return color._color;
+        }
+        /// <summary>
+        /// Takes a single value and applies it to all channels
+        /// </summary>
+        /// <param name="value">The value to apply</param>
+        /// <returns>ImageColor from value</returns>
+        public static ImageColor ColorFromValue(int value)
+        {
+            ImageColor color = new ImageColor
+            {
+                B = (byte)value,
+                G = (byte)value,
+                R = (byte)value,
+                A = (byte)value
+            };
+            return color;
         }
     }
 }

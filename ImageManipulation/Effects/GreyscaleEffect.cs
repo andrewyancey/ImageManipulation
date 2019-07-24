@@ -32,7 +32,7 @@
             ImageColor originalColor = new ImageColor(_inputImage.GetPixel(x, y));
             int colorValue = SumColorValues(originalColor);
             colorValue = colorValue / 4;
-            ImageColor newColor = ColorFromValue(colorValue);
+            ImageColor newColor = ImageColor.ColorFromValue(colorValue);
             _outputImage.SetPixelColor(x, y, newColor);
         }
 
@@ -46,18 +46,6 @@
             sumValue += color.A;
 
             return sumValue;
-        }
-
-        private ImageColor ColorFromValue(int value)
-        {
-            ImageColor color = new ImageColor
-            {
-                B = (byte)value,
-                G = (byte)value,
-                R = (byte)value,
-                A = (byte)value
-            };
-            return color;
         }
     }
 }
