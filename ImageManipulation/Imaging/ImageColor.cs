@@ -103,6 +103,7 @@ namespace ImageManipulation.Imaging
         /// <returns>ImageColor from value</returns>
         public static ImageColor ColorFromValue(int value)
         {
+            if (value > byte.MaxValue) throw new ArgumentOutOfRangeException("the value passed had values greater than byte");
             ImageColor color = new ImageColor
             {
                 B = (byte)value,
