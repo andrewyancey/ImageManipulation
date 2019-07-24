@@ -1,7 +1,8 @@
-﻿using System.Windows.Media;
-
-namespace ImageManipulation.Effects
+﻿namespace ImageManipulation.Effects
 {
+    using System.Windows.Media;
+    using Imaging;
+
     class RedscaleEffect : IEffect
     {
         private CopyableBitmap _inputImage;
@@ -28,14 +29,16 @@ namespace ImageManipulation.Effects
 
         private void RedscalePixel(int x, int y, EditableBitmap _outputImage)
         {
-            Color originalColor = _inputImage.GetPixel(x, y);
-            int colorValue = SumColorValues(originalColor);
+            ImageColor originalColor = new ImageColor(_inputImage.GetPixel(x, y));
+            int colorValue = SumColorChannels(originalColor);
             colorValue = colorValue / 4;
-            Color newColor = RedChannelToValue(colorValue);
+            ImageColor newColor = new ImageColor();
+            newColor.R = (byte)colorValue;
+            newColor.A = 255;
             _outputImage.SetPixelColor(x, y, newColor);
         }
 
-        private int SumColorValues(Color color)
+        private int SumColorChannels(ImageColor color)
         {
             int sumValue = 0;
 
@@ -45,18 +48,6 @@ namespace ImageManipulation.Effects
             sumValue += color.A;
 
             return sumValue;
-        }
-
-        private Color RedChannelToValue(int value)
-        {
-            Color color = new Color
-            {
-                B = 0,
-                G = 0,
-                R = (byte)value,
-                A = 255
-            };
-            return color;
         }
     }
 }
