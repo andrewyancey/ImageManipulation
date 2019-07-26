@@ -18,7 +18,9 @@
                     return new PixelizeEffect(5, 5);
 
                 case EffectType.Redscale:
-                    return new RedscaleEffect();
+                    ChannelscaleEffect RedscaleEffect = new ChannelscaleEffect();
+                    RedscaleEffect.Channel = Imaging.ColorChannel.Red;
+                    return RedscaleEffect;
 
                 default:
                     throw new ArgumentOutOfRangeException(nameof(effectType), effectType, "Invalid effect type.");
