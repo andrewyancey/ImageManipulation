@@ -64,7 +64,6 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Convolutor.cs" />
     <Compile Include="CopyableBitmap.cs" />
     <Compile Include="EditableBitmap.cs" />
     <Compile Include="Effects\BlurEffect.cs" />
@@ -76,7 +75,6 @@
     <Compile Include="Effects\RedscaleEffect.cs" />
     <Compile Include="ImageCollection.cs" />
     <Compile Include="ImageEffects.cs" />
-    <Compile Include="Imaging\ImageColor.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -109,7 +107,9 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Imaging\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

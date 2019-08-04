@@ -2,7 +2,6 @@
 {
     using System.Collections.Generic;
     using System.Windows.Media;
-    using ImageManipulation.Imaging;
 
     public class BlurEffect : IEffect
     {
@@ -49,7 +48,7 @@
         {
             int[] colorSums = SumColorChannels(colorData);
             int[] blurredChannels = DivideArray(colorSums, colorData.Count);
-            return (Color)new ImageColor(blurredChannels);
+            return ToColor(blurredChannels);
         }
 
         private void BlurPixel(int x, int y, EditableBitmap outputImage)
@@ -80,6 +79,18 @@
                 output[i] = (output[i] / divisor);
             }
             return output;
+        }
+
+        private Color ToColor(int[] input)
+        {
+            Color blurredColor = new Color
+            {
+                B = (byte)input[0],
+                G = (byte)input[1],
+                R = (byte)input[2],
+                A = (byte)input[3]
+            };
+            return blurredColor;
         }
     }
 }
