@@ -26,6 +26,14 @@ namespace ImageManipulation
             image.Source = _images.GetCurrentImage();
         }
 
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            DirectoryInfo info = new DirectoryInfo(Environment.GetFolderPath(Environment.SpecialFolder.MyPictures));
+            string[] extensions = { ".jpg", ".jpeg", ".png" };
+            FileInfo[] files = info.EnumerateFiles("*.*", SearchOption.TopDirectoryOnly).Where(f => extensions.Contains(f.Extension)).ToArray();
+            _images.AddImages(files.Select(f => f.FullName).ToArray());
+        }
+
         private void NextBTN_Click(object sender, RoutedEventArgs e)
         {
             _images.AdvanceIndex();
@@ -38,33 +46,25 @@ namespace ImageManipulation
             image.Source = _images.GetCurrentImage();
         }
 
-        private void PixelateBTN_Click(object sender, RoutedEventArgs e)
+        private void PixelateMenu_Click(object sender, RoutedEventArgs e)
         {
             EditableBitmap bmp = ImageEffects.Pixelize(_images.GetCurrentCopyableBitmap());
             image.Source = bmp.GetBMPSource();
         }
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            DirectoryInfo info = new DirectoryInfo(Environment.GetFolderPath(Environment.SpecialFolder.MyPictures));
-            string[] extensions = { ".jpg", ".jpeg", ".png" };
-            FileInfo[] files = info.EnumerateFiles("*.*", SearchOption.TopDirectoryOnly).Where(f => extensions.Contains(f.Extension)).ToArray();
-            _images.AddImages(files.Select(f => f.FullName).ToArray());
-        }
-
-        private void GreyifyBTN_Click(object sender, RoutedEventArgs e)
+        private void GreyifyMenu_Click(object sender, RoutedEventArgs e)
         {
             image.Source = ImageEffects.Greyalize(_images.GetCurrentCopyableBitmap()).GetBMPSource();
         }
 
-        private void BlurBTN_Click(object sender, RoutedEventArgs e)
-        {
-            image.Source = ImageEffects.Blur(_images.GetCurrentCopyableBitmap()).GetBMPSource();
-        }
-
-        private void RedscaleBTN_Click(object sender, RoutedEventArgs e)
+        private void RedscaleMenu_Click(object sender, RoutedEventArgs e)
         {
             image.Source = ImageEffects.Redscale(_images.GetCurrentCopyableBitmap()).GetBMPSource();
+        }
+
+        private void BlurMenu_Click(object sender, RoutedEventArgs e)
+        {
+            image.Source = ImageEffects.Blur(_images.GetCurrentCopyableBitmap()).GetBMPSource();
         }
     }
 }
