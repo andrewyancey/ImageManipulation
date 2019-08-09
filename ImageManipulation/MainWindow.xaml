@@ -16,16 +16,15 @@
                 <MenuItem Header="Blur" x:Name="BlurMenu" Click="BlurMenu_Click"/>
             </MenuItem>
         </Menu>
+        <ToolBar DockPanel.Dock="Top">
+            <Button  x:Name="PreviousBTN" Height="25" FontSize="15" FontWeight="Bold" Padding="0" Click="PreviousBTN_Click" >&lt;&lt;|</Button>
+            <Button  x:Name="NextBTN" Height="25" FontSize="15" FontWeight="Bold" Padding="0"  Click="NextBTN_Click">|&gt;&gt;</Button>
+        </ToolBar>
         <Grid DockPanel.Dock="Bottom">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="150"/>
             </Grid.ColumnDefinitions>
             <Image Grid.Column="0" x:Name="image" HorizontalAlignment="Stretch"  Margin="10,10,10,10" VerticalAlignment="Stretch"  Loaded="image_Loaded"/>
-            <StackPanel Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                <Button  x:Name="NextBTN" Height="30"   Click="NextBTN_Click">Next&gt;&gt;</Button>
-                <Button  x:Name="PreviousBTN" Height="30" Click="PreviousBTN_Click" >&lt;&lt;Previous</Button>
-            </StackPanel>
         </Grid>
     </DockPanel>
 </Window>
