@@ -2,6 +2,8 @@
 {
     using System.Windows;
     using System.Windows.Media;
+    using ImageManipulation.Imaging;
+    using System.Linq;
 
     public class PixelizeEffect : IEffect
     {
@@ -32,7 +34,7 @@
                 for (int offsetY = 0; offsetY < _inputImage.Height; offsetY += _spacingY)
                 {
                     Int32Rect area = DetermineSpacingArea(offsetX, offsetY);
-                    Color averageColor = AverageColor(_inputImage, area);
+                    ImageColor averageColor = AverageColor(_inputImage, area);
                     SetColor(myBmp, area, averageColor);
                 }
             }
@@ -64,17 +66,11 @@
             return new Int32Rect(offsetX, offsetY, width, height);
         }
 
-        private Color AverageColor(CopyableBitmap image, Int32Rect area)
+        private ImageColor AverageColor(CopyableBitmap image, Int32Rect area)
         {
             byte[,] pixels = (byte[,])image.GetPixelChannels(area).Clone();
             int[] channelSums = SumPixelChannels(pixels);
-            Color averageColor = new Color
-            {
-                B = (byte)(channelSums[0] / pixels.GetLength(1)),
-                G = (byte)(channelSums[1] / pixels.GetLength(1)),
-                R = (byte)(channelSums[2] / pixels.GetLength(1)),
-                A = (byte)(channelSums[3] / pixels.GetLength(1))
-            };
+            ImageColor averageColor = new ImageColor(channelSums.Select(t => t / pixels.GetLength(1)).ToArray());
             return averageColor;
         }
 
@@ -93,7 +89,7 @@
             return channelSums;
         }
 
-        private void SetColor(EditableBitmap image, Int32Rect area, Color color)
+        private void SetColor(EditableBitmap image, Int32Rect area, ImageColor color)
         {
             for (int x = area.X; x < area.X + area.Width; x++)
             {
