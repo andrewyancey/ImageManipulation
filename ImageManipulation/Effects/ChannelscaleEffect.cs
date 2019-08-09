@@ -17,24 +17,24 @@
         public EditableBitmap Apply(CopyableBitmap bitmap)
         {
             _inputImage = bitmap;
-            return RedscaleImage();
+            return ChannelscaleImage();
         }
 
-        private EditableBitmap RedscaleImage()
+        private EditableBitmap ChannelscaleImage()
         {
             EditableBitmap outputImage = new EditableBitmap(_inputImage.Width, _inputImage.Height);
             for (int x = 0; x < _inputImage.Width; x++)
             {
                 for (int y = 0; y < _inputImage.Height; y++)
                 {
-                    RedscalePixel(x, y, outputImage);
+                    ScalePixel(x, y, outputImage);
                 }
             }
 
             return outputImage;
         }
 
-        private void RedscalePixel(int x, int y, EditableBitmap _outputImage)
+        private void ScalePixel(int x, int y, EditableBitmap _outputImage)
         {
             ImageColor originalColor = new ImageColor(_inputImage.GetPixel(x, y));
             int colorValue = SumColorChannels(originalColor);
