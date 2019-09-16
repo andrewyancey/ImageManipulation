@@ -8,7 +8,9 @@
         Title="MainWindow" Height="350" Width="525" Loaded="Window_Loaded">
     <DockPanel>
         <Menu DockPanel.Dock="Top">
-            <MenuItem Header="File"></MenuItem>
+            <MenuItem Header="File"> 
+                <MenuItem Header="Save" x:Name="SaveFileMenu" Click="SaveFileMenu_Click"/>
+            </MenuItem>
             <MenuItem Header="Effects">
                 <MenuItem Header="Pixelate" x:Name="PixelateMenu" Click="PixelateMenu_Click"/>
                 <MenuItem Header="Greyify" x:Name="GreyifyMenu" Click="GreyifyMenu_Click"/>

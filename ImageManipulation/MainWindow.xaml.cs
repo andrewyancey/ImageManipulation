@@ -66,5 +66,10 @@ namespace ImageManipulation
         {
             image.Source = ImageEffects.Blur(_images.GetCurrentCopyableBitmap()).GetBMPSource();
         }
+
+        private void SaveFileMenu_Click(object sender, RoutedEventArgs e)
+        {
+            ImageSaver.SaveImage(image.Source);
+        }
     }
 }
