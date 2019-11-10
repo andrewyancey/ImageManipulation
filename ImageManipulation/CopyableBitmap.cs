@@ -19,6 +19,7 @@ namespace ImageManipulation
 
         public CopyableBitmap(Uri path, int width)
         {
+            
             Image = new BitmapImage();
             Image.BeginInit();
             Image.DecodePixelWidth = width;

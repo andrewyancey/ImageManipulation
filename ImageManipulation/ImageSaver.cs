@@ -15,18 +15,22 @@ namespace ImageManipulation
                 System.Windows.Forms.DialogResult result = dialog.ShowDialog();
                 if (result == System.Windows.Forms.DialogResult.OK)
                 {
-                    using (var fileStream = new FileStream(dialog.FileName, FileMode.Create))
+                    try
                     {
-                        try
+                        using (var fileStream = new FileStream(dialog.FileName, FileMode.Create))
                         {
                             BitmapEncoder encoder = new PngBitmapEncoder();
                             encoder.Frames.Add(BitmapFrame.Create((BitmapSource)source));
                             encoder.Save(fileStream);
                         }
-                        catch (Exception ex)
-                        {
-                            Console.WriteLine(ex.Message);
-                        }
+                    }
+                    catch (System.IO.IOException ex) 
+                    {
+                        System.Windows.MessageBox.Show("unable to save. Reason: " + ex.Message);
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex.Message);
                     }
                 }
             }
